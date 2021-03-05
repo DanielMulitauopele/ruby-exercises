@@ -7,6 +7,7 @@ class Centaur
         @cranky = false
         @standing = true
         @cranky_count = 0
+        @sick = false
     end
 
     def shoot
@@ -43,6 +44,10 @@ class Centaur
         !standing?
     end
 
+    def sick?
+        @sick
+    end
+
     def lay_down
         @standing = false
     end
@@ -55,6 +60,17 @@ class Centaur
         if standing?
             return "NO!"
         else 
+            @cranky_count = 0
+            @cranky = false
+        end
+    end
+
+    def drink_potion
+        if laying?
+            return "You want me to spill?"
+        elsif cranky? == false
+            @sick = true
+        else
             @cranky_count = 0
             @cranky = false
         end

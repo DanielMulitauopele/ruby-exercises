@@ -113,18 +113,45 @@ class CentaurTest < Minitest::Test
   end
 
   def test_becomes_rested_after_drinking_a_potion
-    skip
-    # your code here
+    centaur = Centaur.new("George","Palomino")
+
+    centaur.shoot
+    centaur.run
+    centaur.shoot
+
+    assert_equal true, centaur.cranky?
+
+    centaur.drink_potion
+    assert_equal false, centaur.cranky?
+
+    assert_equal "Twang!!!", centaur.shoot
+    assert_equal "Clop clop clop clop!!!", centaur.run
   end
 
   def test_can_only_drink_potion_while_standing
-    skip
-    # your code here
+    centaur = Centaur.new("George","Palomino")
+
+    centaur.shoot
+    centaur.run
+    centaur.shoot
+    centaur.lay_down
+
+    assert_equal true, centaur.cranky?
+    assert_equal "You want me to spill?", centaur.drink_potion
+
+    centaur.stand_up
+    centaur.drink_potion
+
+    assert_equal true, centaur.standing?
+    assert_equal false, centaur.cranky?
   end
 
   def test_gets_sick_if_drinks_potion_while_rested
-    skip
-    # your code here
-  end
+    centaur = Centaur.new("George","Palomino")
 
+    assert_equal false, centaur.cranky?
+    centaur.drink_potion
+
+    assert_equal true, centaur.sick?
+  end
 end
